@@ -2,7 +2,6 @@ const fetch = require('node-fetch')
 
 const {
 	// Travis defaults
-	TRAVIS_BUILD_ID,
 	TRAVIS_BUILD_NUMBER,
 	TRAVIS_BUILD_WEB_URL,
 	TRAVIS_EVENT_TYPE,
@@ -15,7 +14,6 @@ const {
 const message =
 `*🔔 Recent Activity updated!*
 
-*Build ID:* ${TRAVIS_BUILD_ID}
 *Build Number:* ${TRAVIS_BUILD_NUMBER}
 *Build URL:* ${TRAVIS_BUILD_WEB_URL}
 *Trigger Event Type:* ${TRAVIS_EVENT_TYPE}
