@@ -225,11 +225,12 @@ async function main() {
 		}
 	})
 
-	// Notify of build finish
-	await notify()
+	// Notify of build finish if Travis env
+	if (process.env.TRAVIS) {
+		await notify()
+	}
 }
 
 (async () => {
 	await main()
 })()
-
