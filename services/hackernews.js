@@ -41,8 +41,6 @@ module.exports = async function(gist) {
 		...addedItems
 	]
 
-	console.log(updatedFaves)
-
 	// sort comments and stories by time
 	updatedFaves.sort((a, b) => a.time < b.time ? 1 : -1)
 
