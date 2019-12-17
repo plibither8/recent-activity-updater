@@ -14,8 +14,6 @@ async function main() {
 	const octokit = new Octokit({ auth: `token ${GITHUB_TOKEN}` }) // Instantiate Octokit
 	const gist = await octokit.gists.get({ gist_id: GIST_ID }) // get the gist
 
-	await services.hackernews(gist)
-
 	// get final gist content
 	const gistContent = {}
 
