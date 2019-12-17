@@ -23,7 +23,7 @@ module.exports = async function(gist) {
 
 	let count = 1
 	for (const [index, item] of addedItems.entries()) {
-		const details = await fetch(`${HN_API_URL}/${item.id}`).then(res => res.json())
+		const details = await fetch(`${HN_API_URL}/${item}`).then(res => res.json())
 		addedItems[index] = {
 			id: details.id,
 			link: details.url,
