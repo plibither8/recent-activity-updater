@@ -13,12 +13,7 @@ const {
 
 const message =
 `*🔔 Recent Activity updated!*
-
-*Build Number:* ${TRAVIS_BUILD_NUMBER}
-*Build URL:* ${TRAVIS_BUILD_WEB_URL}
-*Trigger Event Type:* ${TRAVIS_EVENT_TYPE}
-
-[Visit site](https://plibither8.netlify.com)`
+Visit site: https://plibither8.netlify.com`
 
 module.exports = async function() {
 	await fetch(`https://tg.mihir.ch/${TG_BOT_NAME}`, {

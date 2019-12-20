@@ -1,0 +1,35 @@
+name: "Recent Activity Updater Bot"
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: "0 11 * * *" # Every day @ 11PM UTC = 4.30AM IST
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: "Install Node"
+      uses: actions/setup-node@v1
+
+    - name: "Install NPM dependancies"
+      run: npm install
+
+    - name: "Run code"
+      run: node index.js
+      env:
+        CI: true
+        GIST_ID: ${{ secrets.GIST_ID }}
+        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+        SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+        LASTFM_KEY: ${{ secrets.LASTFM_KEY }}
+        LASTFM_USER: ${{ secrets.LASTFM_USER }}
+        WAKATIME_USER: ${{ secrets.WAKATIME_USER }}
+        WAKATIME_KEY: ${{ secrets.WAKATIME_KEY }}
+        TG_BOT_NAME: ${{ secrets.TG_BOT_NAME }}
+        TG_BOT_SECRET: ${{ secrets.TG_BOT_SECRET }}
