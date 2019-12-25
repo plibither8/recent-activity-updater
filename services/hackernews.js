@@ -7,9 +7,7 @@ module.exports = async function(gist) {
 
 	const HN_FAVES_URL = 'https://hn-faves.mihir.ch/plibither8?all=true'
 	const currentFaveIds = await fetch(HN_FAVES_URL)
-		.then(res => {console.log(res);return res})
 		.then(res => res.json())
-		.then(res => {console.log(res);return res})
 		.then(res => Object.values(res).flat())
 		.then(res => res.map(item => Number(item.id)))
 	console.log('done: hacker news faves')
