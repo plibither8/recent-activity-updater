@@ -26,7 +26,7 @@ module.exports = async function(gist) {
 		const details = await fetch(`${HN_API_URL}/${item}`).then(res => res.json())
 		addedItems[index] = {
 			id: details.id,
-			link: details.url,
+			link: details.url || 'https://news.ycombinator.com/item?id=' + details.id,
 			time: details.created_at_i * 1000,
 			text: details.text,
 			type: details.type,
