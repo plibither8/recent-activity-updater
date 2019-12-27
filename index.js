@@ -34,7 +34,7 @@ async function main() {
 	})
 	console.log('done: gist updated')
 
-	// Notify of build finish if Travis env
+	// Notify of build finish if CI env
 	if (process.env.CI) {
 		await notify()
 	}

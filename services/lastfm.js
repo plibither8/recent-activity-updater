@@ -39,7 +39,7 @@ module.exports = async function() {
 			}
 		}).then(res => res.json())
 		const artist = searchResults.artists.items[0]
-		const artistImage = artist.images[2].url // 300x300
+		const artistImage = artist.images[2].url // 64x64
 		return artistImage
 	}
 
