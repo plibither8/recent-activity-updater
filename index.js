@@ -1,12 +1,14 @@
 const Octokit = require('@octokit/rest')
 const services = require('require-all')(__dirname + '/services')
+const fetch = require('node-fetch')
 
 const notify = require('./notify')
 
 // GitHub Gists env variables
 const {
 	GIST_ID,
-	GITHUB_TOKEN
+	GITHUB_TOKEN,
+	NETLIFY_BUILD_HOOK
 } = process.env
 
 // actual function that runs it all
@@ -37,6 +39,7 @@ async function main() {
 	// Notify of build finish if CI env
 	if (process.env.CI) {
 		await notify()
+		await fetch(NETLIFY_BUILD_HOOK, { method:'POST' })
 	}
 }
 
