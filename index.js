@@ -38,8 +38,8 @@ async function main() {
 
 	// Notify of build finish if CI env
 	if (process.env.CI) {
-		await notify()
 		await fetch(NETLIFY_BUILD_HOOK, { method:'POST' })
+		await notify()
 	}
 }
 
