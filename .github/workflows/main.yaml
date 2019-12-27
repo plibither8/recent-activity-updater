@@ -5,7 +5,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: "0 0 * * *" # Every day @ 12AM UTC = 5.30AM IST
+    - cron: "0 0/2 * * *" # Every two hours
 
 jobs:
   bot:
