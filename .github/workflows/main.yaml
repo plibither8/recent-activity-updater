@@ -35,3 +35,4 @@ jobs:
         WAKATIME_KEY: ${{ secrets.WAKATIME_KEY }}
         TG_BOT_NAME: ${{ secrets.TG_BOT_NAME }}
         TG_BOT_SECRET: ${{ secrets.TG_BOT_SECRET }}
+        NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
