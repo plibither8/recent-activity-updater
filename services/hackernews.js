@@ -1,4 +1,11 @@
+const {writeFile} = require('fs').promises
+const path = require('path')
 const fetch = require('node-fetch')
+
+const saveDelta = async delta => {
+	const filePath = path.join(__dirname, '../delta.json')
+	await writeFile(filePath, JSON.stringify(delta))
+}
 
 // Main function
 module.exports = async function(gist) {
@@ -16,8 +23,16 @@ module.exports = async function(gist) {
 	const currentList = oldFaves.filter(item1 => currentFaveIds.find(item2 => item1.id === item2))
 	const addedItems = currentFaveIds.filter(item1 => !oldFaves.find(item2 => item1 === item2.id))
 
+	const delta = {
+		added: addedItems.length,
+		removed: oldFaves.length - currentList.length
+	}
+
 	// number of items removed + added
-	console.log('hn faves delta:', oldFaves.length - currentList.length + addedItems.length)
+	console.log('hn faves delta:', delta.added + delta.removed)
+
+	// write deltas to file for notify.js
+	await saveDelta(delta)
 
 	const HN_API_URL = 'http://hn.algolia.com/api/v1/items'
 
