@@ -15,9 +15,17 @@ module.exports = async function() {
 	async function getLanguageColor(name) {
 		// default color
 		let color = '#cccccc'
+
 		// important checks
-		if (colorData[name] && colorData[name].color) {
-			color = colorData[name].color
+		if (colorData[name]) {
+			if (colorData[name].color) {
+				color = colorData[name].color
+			} else {
+				const {group} = colorData[name]
+				if (group && colorData[group].color) {
+					color = colorData[group].color
+				}
+			}
 		}
 
 		return color
