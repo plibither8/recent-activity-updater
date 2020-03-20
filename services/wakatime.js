@@ -3,6 +3,20 @@ const jsyaml = require('js-yaml')
 
 const { WAKATIME_KEY } = process.env
 
+const exceptions = {
+	colors: {
+		GAS: {
+			group: "Assembly"
+		},
+		JSON: {
+			group: "JavaScript"
+		}
+	},
+	names: {
+		GAS: "Assembly"
+	}
+}
+
 // Main function
 module.exports = async function() {
 	// this will hold all the color data
@@ -10,6 +24,11 @@ module.exports = async function() {
 		.then(res => res.text())
 		.then(text => jsyaml.safeLoad(text))
 	console.log('done: github linguist colors')
+
+	colorData = {
+		...colorData,
+		...exceptions.colors
+	}
 
 	// get a language color data
 	async function getLanguageColor(name) {
@@ -62,7 +81,7 @@ module.exports = async function() {
 		}
 
 		filteredStats.languages.push({
-			name: lang.name,
+			name: exceptions.names[lang.name] || lang.name,
 			percent: lang.percent,
 			time: lang.text,
 			color: await getLanguageColor(lang.name)
