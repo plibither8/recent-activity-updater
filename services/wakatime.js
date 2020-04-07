@@ -81,11 +81,13 @@ module.exports = async function() {
 			continue
 		}
 
+		const langName = exceptions.names[lang.name] || lang.name
+
 		filteredStats.languages.push({
-			name: exceptions.names[lang.name] || lang.name,
+			name: langName,
 			percent: lang.percent,
 			time: lang.text,
-			color: await getLanguageColor(lang.name)
+			color: await getLanguageColor(langName)
 		})
 	}
 
