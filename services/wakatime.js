@@ -13,7 +13,8 @@ const exceptions = {
 		}
 	},
 	names: {
-		GAS: "Assembly"
+		GAS: "Assembly",
+		Bash: "Shell"
 	}
 }
 
