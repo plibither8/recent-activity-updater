@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const Octokit = require('@octokit/rest')
 const services = require('require-all')(__dirname + '/services')
 const fetch = require('node-fetch')
