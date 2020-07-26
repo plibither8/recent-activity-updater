@@ -10,6 +10,9 @@ const exceptions = {
 		},
 		JSON: {
 			group: "JavaScript"
+		},
+		Svelte: {
+			color: "#ff3e00"
 		}
 	},
 	names: {
