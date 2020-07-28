@@ -41,7 +41,7 @@ async function main() {
 	// Notify of build finish if CI env
 	if (process.env.CI) {
 		await fetch(NETLIFY_BUILD_HOOK, { method: 'POST' })
-		await notify(gistContent)
+		await notify()
 	}
 }
 
