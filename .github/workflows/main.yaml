@@ -16,7 +16,7 @@ jobs:
     - name: "Install Node"
       uses: actions/setup-node@v1
       with:
-        node-version: '12.x'
+        node-version: '15.x'
 
     - name: "Install NPM dependancies"
       run: npm install

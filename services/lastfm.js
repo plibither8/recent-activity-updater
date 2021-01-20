@@ -38,8 +38,8 @@ module.exports = async function() {
 				'Authorization': 'Bearer ' + SPOTIFY_ACCESS_TOKEN
 			}
 		}).then(res => res.json())
-		const artist = searchResults.artists.items[0]
-		const artistImage = artist ? artist.images[2].url : undefined // 64x64
+		const artist = searchResults.artists?.items[0]
+		const artistImage = artist?.images?.[2]?.url // 64x64
 		return artistImage
 	}
 
