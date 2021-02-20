@@ -11,9 +11,6 @@ const exceptions = {
 		JSON: {
 			group: "JavaScript"
 		},
-		JSX: {
-			group: "JavaScript",
-		},
 		Svelte: {
 			color: "#ff3e00"
 		}
