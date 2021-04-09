@@ -3,7 +3,7 @@
 	"dependencies": {
 		"@octokit/rest": "^16.35.2",
 		"js-yaml": "^3.13.1",
-		"node-fetch": "^2.6.0",
+		"node-fetch": "^2.6.1",
 		"require-all": "^3.0.0",
 		"x-ray": "^2.3.4"
 	},
