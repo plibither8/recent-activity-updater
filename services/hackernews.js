@@ -1,22 +1,27 @@
 const {writeFile} = require('fs').promises
 const path = require('path')
 const fetch = require('node-fetch')
+const x = require('x-ray')()
 
 const saveDelta = async delta => {
 	const filePath = path.join(__dirname, '../delta.json')
 	await writeFile(filePath, JSON.stringify(delta))
 }
 
+const getFaves = async comments => {
+	const url = `https://news.ycombinator.com/favorites?id=plibither8&comments=${comments.toString()}`
+	const list = await x(url, 'tr.athing', [{id: '@id'}]).paginate('a.morelink@href');
+	return list.map(({id}) => Number(id));
+}
+
 // Main function
-module.exports = async function(gist) {
+module.exports = async function (gist) {
 	const gistContent = JSON.parse(Object.values(gist.data.files)[0].content)
 	const oldFaves = gistContent.hackernews
-
-	const HN_FAVES_URL = 'https://hn-faves.mihir.ch/plibither8?all=true'
-	const currentFaveIds = await fetch(HN_FAVES_URL)
-		.then(res => res.json())
-		.then(json => Object.values(json).flat())
-		.then(list => list.map(item => Number(item.id)))
+	const currentFaveIds = [
+		...(await getFaves(false)),
+		...(await getFaves(true)),
+	];
 	console.log('done: hacker news faves')
 
 	// Remove _removed_ favorited items
