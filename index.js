@@ -38,14 +38,13 @@ async function main() {
 	})
 	console.log('done: gist updated')
 
-	/**
-	 * Pause Notifications for some time
+
 	 // Notify of build finish if CI env
-		if (process.env.CI) {
-			await fetch(NETLIFY_BUILD_HOOK, { method: 'POST' })
-			await notify()
-		}
-	 */
+	if (process.env.CI) {
+		await fetch(NETLIFY_BUILD_HOOK, { method: 'POST' })
+		// Pause Notifications for some time
+		// await notify()
+	}
 
 }
 
