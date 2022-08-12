@@ -12,17 +12,25 @@ const { GIST_ID, GITHUB_TOKEN, NETLIFY_BUILD_HOOK } = process.env;
 // actual function that runs it all
 async function main() {
   const octokit = new Octokit({ auth: `token ${GITHUB_TOKEN}` }); // Instantiate Octokit
-  const gist = await octokit.gists.get({ gist_id: GIST_ID }); // get the gist
+  const originalGist = await octokit.gists.get({ gist_id: GIST_ID }); // get the gist
+  const originalGistContent = JSON.parse(
+    Object.values(originalGist.data.files)[0].content
+  );
 
   // get final gist content
   const gistContent = {};
 
   for (const [name, func] of Object.entries(services)) {
-    gistContent[name] = await func(gist);
+    try {
+      gistContent[name] = await func(originalGistContent);
+    } catch (err) {
+      gistContent[name] = originalGistContent[name];
+      console.error(`Service ${name} failed:`, err);
+    }
   }
 
   // Get original filename to update that same file
-  const filename = Object.keys(gist.data.files)[0];
+  const filename = Object.keys(originalGist.data.files)[0];
   await octokit.gists.update({
     gist_id: GIST_ID,
     files: {
