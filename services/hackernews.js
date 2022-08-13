@@ -22,10 +22,10 @@ module.exports = async function (gist) {
 
   // Remove _removed_ favorited items
   const currentList = oldFaves.filter((item1) =>
-    currentFaveIds.find((item2) => String(item1.id) === item2.id)
+    currentFaveIds.find((item2) => item1.id === item2.id)
   );
   const addedItems = currentFaveIds.filter(
-    (item1) => !oldFaves.find((item2) => item1.id === String(item2.id))
+    (item1) => !oldFaves.find((item2) => item1.id === item2.id)
   );
 
   const delta = {

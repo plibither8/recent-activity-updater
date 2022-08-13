@@ -13,19 +13,15 @@ const { GIST_ID, GITHUB_TOKEN, NETLIFY_BUILD_HOOK } = process.env;
 async function main() {
   const octokit = new Octokit({ auth: `token ${GITHUB_TOKEN}` }); // Instantiate Octokit
   const originalGist = await octokit.gists.get({ gist_id: GIST_ID }); // get the gist
-  const originalGistContent = JSON.parse(
+  const gistContent = JSON.parse(
     Object.values(originalGist.data.files)[0].content
   );
 
-  // get final gist content
-  const gistContent = {};
-
   for (const [name, func] of Object.entries(services)) {
     try {
-      gistContent[name] = await func(originalGistContent);
+      gistContent[name] = await func(gistContent);
     } catch (err) {
-      gistContent[name] = originalGistContent[name];
-      console.error(`Service ${name} failed:`, err);
+      console.error(`Service "${name}" failed:`, err);
     }
   }
 
