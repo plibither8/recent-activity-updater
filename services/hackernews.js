@@ -1,6 +1,12 @@
 const fetch = require("node-fetch");
 
 const getFaves = async (comments) => {
+  const deleteCache = await fetch(
+    `https://hn-faves.mihir.ch/plibither8/${
+      comments ? "comments" : "stories"
+    }/delete-cache`
+  ).then((res) => res.text());
+  console.log("Cache", deleteCache);
   const url = `https://hn-faves.mihir.ch/plibither8/${
     comments ? "comments" : "stories"
   }`;
@@ -13,10 +19,9 @@ const getFaves = async (comments) => {
 // Main function
 module.exports = async function (gist) {
   const oldFaves = gist.hackernews ?? [];
-  const currentFaveIds = [
-    ...(await getFaves(false)),
-    ...(await getFaves(true)),
-  ];
+  const comments = await getFaves(true);
+  const stories = await getFaves(false);
+  const currentFaveIds = [...stories, ...comments];
   console.log("done: hacker news faves", currentFaveIds.length);
 
   // Remove _removed_ favorited items
