@@ -1,14 +1,13 @@
-const { writeFile } = require("fs").promises;
-const path = require("path");
 const fetch = require("node-fetch");
-const x = require("x-ray")();
 
 const getFaves = async (comments) => {
   const url = `https://hn-faves.mihir.ch/plibither8/${
     comments ? "comments" : "stories"
   }`;
   const res = await fetch(url);
-  return await res.json();
+  const text = await res.text();
+  console.log("debugging", `${comments ? "comments" : "stories"}: ${text}`);
+  return JSON.parse(text);
 };
 
 // Main function

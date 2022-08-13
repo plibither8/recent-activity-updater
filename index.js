@@ -27,15 +27,15 @@ async function main() {
 
   // Get original filename to update that same file
   const filename = Object.keys(originalGist.data.files)[0];
-  await octokit.gists.update({
-    gist_id: GIST_ID,
-    files: {
-      [filename]: {
-        filename,
-        content: JSON.stringify(gistContent, null, "  "),
-      },
-    },
-  });
+  // await octokit.gists.update({
+  //   gist_id: GIST_ID,
+  //   files: {
+  //     [filename]: {
+  //       filename,
+  //       content: JSON.stringify(gistContent, null, "  "),
+  //     },
+  //   },
+  // });
   console.log("done: gist updated");
 
   // Notify of build finish if CI env
