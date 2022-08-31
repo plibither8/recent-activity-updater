@@ -1,19 +1,11 @@
 const fetch = require("node-fetch");
 
 const getFaves = async (comments) => {
-  const deleteCache = await fetch(
-    `https://hn-faves.mihir.ch/plibither8/${
-      comments ? "comments" : "stories"
-    }/delete-cache`
-  ).then((res) => res.text());
-  console.log("Cache", deleteCache);
   const url = `https://hn-faves.mihir.ch/plibither8/${
     comments ? "comments" : "stories"
   }`;
   const res = await fetch(url);
-  const text = await res.text();
-  console.log("debugging", `${comments ? "comments" : "stories"}: ${text}`);
-  return JSON.parse(text);
+  return res.json();
 };
 
 // Main function
