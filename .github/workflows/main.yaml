@@ -6,6 +6,7 @@ on:
       - master
   schedule:
     - cron: "0 0/6 * * *" # Every two hours
+  workflow_dispatch:
 
 jobs:
   bot:
